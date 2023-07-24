@@ -60,6 +60,8 @@ class UserContoller extends Controller
         try {
             // register a new user
             $userData = $request->validated();
+            $otp = $this->generateOTP(4);
+            $userData['otp'] = $otp;
             $userData['user'] = 0;
             $userData['password'] = Hash::make($userData['password']);
             $validator = Validator::make($userData, $request->rules(), $request->messages());
@@ -71,7 +73,7 @@ class UserContoller extends Controller
             // send email to registered users
             $body = [
                 'name' => $users->name,
-                'otp' => $this->generateOTP(4),
+                'otp' => $otp,
             ];
             Mail::to($users->email)->send(new UserRegistration($body));
 
@@ -100,7 +102,7 @@ class UserContoller extends Controller
                 throw new Exception($validator->errors()->first());
             }
 
-            $user = User::where('email', $request->email)->where('otp', $request->otp)->first();
+            $user = User::where('otp', $request->otp)->first();
             if (!$user) {
                 throw new Exception("Invalid email or OTPs");
             }

@@ -17,22 +17,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [UserContoller::class, 'login']);
 
+// register users
+Route::post('/store-users', [UserContoller::class, 'store']);
+// verify otp
+Route::post('/verify-otp', [UserContoller::class, 'verifyOTP']);
+
 Route::middleware('auth:sanctum')->group(function () {
     // get all users
     Route::get('/get-all-users', [UserContoller::class, 'index']);
 
-    // register users
-    Route::post('/store-users', [UserContoller::class, 'store']);
-
-    // verify otp
-    Route::post('/verify-otp', [UserContoller::class,'verifyOTP']);
 
     // get single user
     Route::get('/show-single-user/{id}', [UserContoller::class, 'show']);
 
     // update info of a user
     Route::post('/udpate/{id}', [UserContoller::class, 'update']);
-    
+
     // soft deleting
     Route::delete('/delete/{id}', [UserContoller::class, 'archive']);
 
