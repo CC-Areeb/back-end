@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('otp')->default(null)->nullable();
             $table->boolean('super_admin')->default(0);
             $table->boolean('admin')->default(0);
             $table->boolean('user')->default(0);
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->decimal('longitude', 16, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

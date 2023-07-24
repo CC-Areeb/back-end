@@ -28,9 +28,13 @@ class DatabaseSeeder extends Seeder
             'zip_code' => '87804',
             'latitude' => '40.712345',
             'longitude' => '-74.006789',
+            'otp' => null,
         ]);
-        $this->call([
-            UserSeeder::class,
-        ]);
+
+
+        // Use this for dummy user data
+        // $this->call([
+        //     UserSeeder::class,
+        // ]);
     }
 }
