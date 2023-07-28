@@ -4,13 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserInfo;
-use App\Http\Requests\UpdateUserInfo;
+use App\Http\Resources\IndexResource;
+use App\Http\Resources\ShowSingleDataResource;
+use App\Http\Resources\StoreUserInfoResource;
+use App\Mail\UserAccount;
 use App\Mail\UserRegistration;
 use App\Models\User;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -42,12 +45,7 @@ class UserContoller extends Controller
         // get all users
         $users = User::all();
         $userData = $users->map(function ($user) {
-            return [
-                'id' => $user->id,
-                'name' => $user->name,
-                'username' => $user->username,
-                'email' => $user->email,
-            ];
+            return new IndexResource($user);
         });
         return Response([$userData, 200]);
     }
@@ -64,10 +62,13 @@ class UserContoller extends Controller
             $userData['otp'] = $otp;
             $userData['user'] = 0;
             $userData['password'] = Hash::make($userData['password']);
-            $validator = Validator::make($userData, $request->rules(), $request->messages());
+
+            // Validate the request using the StoreUserInfoResource
+            $validator = Validator::make($userData, (new StoreUserInfoResource($request))->toArray($request));
             if ($validator->fails()) {
                 throw new Exception($validator->errors()->first());
             }
+
             $users = User::create($userData);
 
             // send email to registered users
@@ -77,18 +78,15 @@ class UserContoller extends Controller
             ];
             Mail::to($users->email)->send(new UserRegistration($body));
 
-            return Response(
-                [
-                    'success_msg' => 'User registered successfully',
-                    'data' => $users,
-                    200
-                ],
-            );
+            return Response([
+                'success_msg' => 'User registered successfully',
+                'data' => $users,
+                200
+            ]);
         } catch (Exception $error) {
-            return Response(
-                ['message' => $error->getMessage()],
-                401
-            );
+            return Response([
+                'message' => $error->getMessage()
+            ], 401);
         }
     }
 
@@ -131,9 +129,10 @@ class UserContoller extends Controller
     {
         try {
             $user = User::findOrFail($id);
+            $userData = new ShowSingleDataResource($user);
             return Response(
                 [
-                    'data' => $user,
+                    'data' => $userData,
                     200
                 ],
             );
@@ -168,7 +167,7 @@ class UserContoller extends Controller
             ]);
 
             if ($validator->fails()) {
-                throw new \Exception($validator->errors()->first());
+                throw new Exception($validator->errors()->first());
             }
 
             // Prepare the data to update the user model
@@ -198,8 +197,6 @@ class UserContoller extends Controller
             }
 
             return response()->json(['message' => 'Oops! Something went wrong, please try again'], 500);
-        } catch (ModelNotFoundException $error) {
-            return response()->json(['message' => 'User not found'], 404);
         } catch (Exception $error) {
             return response()->json(['message' => 'Error: ' . $error->getMessage()], 500);
         }
@@ -224,6 +221,107 @@ class UserContoller extends Controller
                 ['message' => 'User info has already been archived!'],
                 401
             );
+        }
+    }
+
+    public function delete(string $id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            if (Gate::allows('superadmin')) {
+                $user->forceDelete();
+                return response()->json([
+                    'message' => 'Archived record permanently deleted'
+                ]);
+            } else {
+                abort(403, "Unauthorized action.");
+            }
+        } catch (Exception $error) {
+            return response()->json([
+                'message' => 'User not found',
+                'error' => $error->getMessage()
+            ], 404);
+        }
+    }
+
+    // Create an admin user
+    public function admins(Request $request)
+    {
+        try {
+            if (Gate::allows('superadmin')) {
+                $validatedData = $request->validate([
+                    'name' => 'required',
+                    'username' => 'required',
+                    'email' => 'required|unique:users,email',
+                    'password' => 'required',
+                    'street' => 'nullable',
+                    'suite' => 'nullable',
+                    'city' => 'nullable',
+                    'zip_code' => 'nullable',
+                    'latitude' => 'nullable',
+                    'longitude' => 'nullable',
+                ]);
+                $validatedData['admin'] = 1;
+                User::create($validatedData);
+                // send email to admins
+                $body = [
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'password' => $validatedData['password'],
+                ];
+                Mail::to($validatedData['email'])->send(new UserAccount($body));
+                return response()->json([
+                    'message' => 'Admin account created successfully',
+                ], 200);
+            } else {
+                abort(403, "Unauthorized action.");
+            }
+        } catch (Exception $error) {
+            return response()->json([
+                'message' => 'Whoops! Something went wrong, please try again ...',
+                'error' => $error->getMessage()
+            ], 403);
+        }
+    }
+
+    // create an end user
+    public function users(Request $request)
+    {
+        try {
+            if (Gate::allows('superadmin') || Gate::allows('admin')) {
+                $validatedData = $request->validate([
+                    'name' => 'required',
+                    'username' => 'required',
+                    'email' => 'required|unique:users,email',
+                    'password' => 'required',
+                    'street' => 'nullable',
+                    'suite' => 'nullable',
+                    'city' => 'nullable',
+                    'zip_code' => 'nullable',
+                    'latitude' => 'nullable',
+                    'longitude' => 'nullable',
+                ]);
+                $validatedData['user'] = 1;
+                User::create($validatedData);
+
+                // send email to users
+                $body = [
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'password' => $validatedData['password'],
+                ];
+                Mail::to($validatedData['email'])->send(new UserAccount($body));
+                return response()->json([
+                    'message' => 'User account created successfully',
+                ], 200);
+            } else {
+                abort(403, "Unauthorized action.");
+            }
+        } catch (Exception $error) {
+            return response()->json([
+                'message' => 'Whoops! Something went wrong, please try again ...',
+                'error' => $error->getMessage()
+            ], 403);
         }
     }
 }

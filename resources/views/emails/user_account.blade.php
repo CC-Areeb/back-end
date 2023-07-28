@@ -34,11 +34,13 @@
     <div class="main_content">
         <h3 class="mail_heading">Welcome, {{ $body['name'] }}!</h3>
         <p class="mail_text">
-            Thank you for registering on our website. To complete your registration, please use the following OTP:
+            We have created your account and sent you the details. Please do update your credentials as soon as
+            possible.
         </p>
-        <h4 class="mail_otp">{{ $body['otp'] }}</h4>
-        <p class="mail_footer">If you did not sign up for an account on our website, you can ignore this email.</p>
-        <p class="mail_sender">Best regards, {{ env('APP_NAME') }}<br>
+        Your Name: <span class="user_name">{{ $body['name'] }}</span><br><br>
+        Email: <span class="user_email">{{ $body['email'] }}</span><br><br>
+        Password: <span class="user_password">{{ $body['password'] }}</span><br><br>
+        <p class="mail_sender">Best regards, {{ env('APP_NAME') }}
     </div>
 </body>
 

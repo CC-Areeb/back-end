@@ -57,16 +57,16 @@ class User extends Authenticatable
 
     public function isSuperAdmin()
     {
-        return $this->is_super_admin;
+        return $this->super_admin;
     }
 
     public function isAdmin()
     {
-        return $this->is_admin;
+        return $this->admin;
     }
 
     public function isUser()
     {
-        return $this->is_user;
+        return $this->user;
     }
 }
