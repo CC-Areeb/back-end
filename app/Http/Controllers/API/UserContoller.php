@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Validator;
 class UserContoller extends Controller
 {
 
+    public function getToken()
+    {
+        return response()->json(['csrf_token' => csrf_token()]);
+    }
+
     public function generateOTP($otpDigits)
     {
         return rand(pow(10, $otpDigits - 1), pow(10, $otpDigits) - 1);
@@ -31,8 +36,18 @@ class UserContoller extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $user_type = '';
+            if ($user->isSuperAdmin()) {
+                $user_type = 'super admin';
+            }
+            if ($user->isAdmin()) {
+                $user_type = 'admin';
+            }
+            if ($user->isUser()) {
+                $user_type = 'user';
+            }
             $token = $user->createToken('Admin Token')->plainTextToken;
-            return response()->json(['token' => $token]);
+            return response()->json(['token' => $token, 'user_type' => $user_type]);
         }
         return response()->json(['message' => 'Unauthorized'], 401);
     }
@@ -323,5 +338,27 @@ class UserContoller extends Controller
                 'error' => $error->getMessage()
             ], 403);
         }
+    }
+
+    // resend otp
+    public function resendOtp(Request $request)
+    {
+        $otp = $this->generateOTP(4);
+        // Update the user's record with the new OTP value
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $user->otp = $otp;
+        $user->save();
+        // Send the new OTP via email
+        $body = [
+            'name' => $user->name,
+            'otp' => $otp,
+        ];
+        Mail::to($request->email)->send(new UserRegistration($body));
+        return response()->json([
+            'message' => 'OTP has been sent again',
+        ], 200);
     }
 }

@@ -25,7 +25,7 @@ class StoreUserInfo extends FormRequest
             'name' => 'required',
             'username' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|confirmed',
             'street' => 'nullable',
             'suite' => 'nullable',
             'city' => 'nullable',
@@ -42,6 +42,7 @@ class StoreUserInfo extends FormRequest
             'username.required' => 'Please enter a username',
             'email.required' => 'Please enter a valid and unique email',
             'password.required' => 'Please enter a password',
+            'password.confirmed' => 'Passwords do not match',
         ];
     }
 }

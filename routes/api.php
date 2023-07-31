@@ -23,6 +23,12 @@ Route::post('/store-users', [UserContoller::class, 'store']);
 // verify otp
 Route::post('/verify-otp', [UserContoller::class, 'verifyOTP']);
 
+// resend otp
+Route::post('/resend-otp', [UserContoller::class, 'resendOtp']);
+
+// get csrf token
+Route::get('/csrf-token', [UserContoller::class, 'getToken']);
+
 Route::middleware('auth:sanctum')->group(function () {
     // get all users
     Route::get('/get-all-users', [UserContoller::class, 'index']);
