@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
             'super_admin' => 1,
             'otp' => null,
         ]);
+
+        $this->call(UserSeeder::class);
     }
 }

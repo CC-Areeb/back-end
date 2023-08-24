@@ -21,11 +21,6 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'street' => fake()->streetAddress(),
-            'city' => fake()->city(),
-            'zip_code' => '1234-5678-9',
-            'latitude' => fake()->latitude(),
-            'longitude' => fake()->longitude(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];
