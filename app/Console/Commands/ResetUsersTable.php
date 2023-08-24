@@ -13,7 +13,7 @@ class ResetUsersTable extends Command
      *
      * @var string
      */
-    protected $signature = 'app:reset-users-table';
+    protected $signature = 'app:reset';
 
     /**
      * The console command description.

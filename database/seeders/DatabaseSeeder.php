@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'username' => 'admin',
             'super_admin' => 1,
-            'admin' => 1,
-            'user' => 1,
             'street' => '12 Arrowhead St. Dayton, OH 45420',
             'suite' => 'Suite 776',
             'city' => 'Huelstown',
@@ -33,8 +31,8 @@ class DatabaseSeeder extends Seeder
 
 
         // Use this for dummy user data
-        // $this->call([
-        //     UserSeeder::class,
-        // ]);
+        $this->call([
+            UserSeeder::class,
+        ]);
     }
 }
