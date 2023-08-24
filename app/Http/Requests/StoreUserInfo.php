@@ -26,12 +26,6 @@ class StoreUserInfo extends FormRequest
             'username' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
-            'street' => 'nullable',
-            'suite' => 'nullable',
-            'city' => 'nullable',
-            'zip_code' => 'nullable',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
         ];
     }
 

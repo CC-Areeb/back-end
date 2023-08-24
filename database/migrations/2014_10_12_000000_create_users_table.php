@@ -21,12 +21,6 @@ return new class extends Migration
             $table->boolean('super_admin')->default(0);
             $table->boolean('admin')->default(0);
             $table->boolean('user')->default(0);
-            $table->string('street')->nullable();
-            $table->string('suite')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zip_code')->nullable();
-            $table->decimal('latitude', 16, 2)->nullable();
-            $table->decimal('longitude', 16, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

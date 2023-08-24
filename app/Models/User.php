@@ -26,12 +26,6 @@ class User extends Authenticatable
         'super_admin',
         'admin',
         'user',
-        'street',
-        'suite',
-        'city',
-        'zip_code',
-        'latitude',
-        'longitude',
         'otp',
     ];
 
