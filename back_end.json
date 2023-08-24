@@ -1,0 +1,455 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "practise",
+    "dateExported": "2023-08-24T20:31:13.026Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Users",
+            "containerId": "",
+            "created": "2023-07-23T20:02:45.435Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "49ece377-6c76-4c0f-94db-8f5cf75ae2b6",
+            "name": "CSRF token",
+            "containerId": "",
+            "created": "2023-07-29T15:01:20.353Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "ed2d5967-b28f-47d4-934e-e4026b416f02",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Get all users",
+            "url": "http://127.0.0.1:8000/api/get-all-users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-08T15:45:08.649Z",
+            "modified": "2023-07-28T20:08:42.172Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "9|CcTpgjptxw4WDux2mdXNmucONGqdW7qN0iEqVBUD"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2d65e666-87ef-4c21-944e-117a8987ff33",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Store users",
+            "url": "http://127.0.0.1:8000/api/store-users",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-08T15:46:51.794Z",
+            "modified": "2023-07-24T18:46:11.155Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Tyler Baird"
+                    },
+                    {
+                        "name": "username",
+                        "value": "tbird"
+                    },
+                    {
+                        "name": "email",
+                        "value": "mclain34@akunzoom.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    },
+                    {
+                        "name": "street",
+                        "value": "Victor Plains"
+                    },
+                    {
+                        "name": "suite",
+                        "value": "Suite 879"
+                    },
+                    {
+                        "name": "city",
+                        "value": "Wisokyburgh"
+                    },
+                    {
+                        "name": "zip_code",
+                        "value": "90566-7771"
+                    },
+                    {
+                        "name": "latitude",
+                        "value": "-43.9509"
+                    },
+                    {
+                        "name": "longitude",
+                        "value": "-34.4618"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e590af76-6b58-4997-adbe-3244cde14dca",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Login",
+            "url": "http://127.0.0.1:8000/api/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-07-08T19:25:36.420Z",
+            "modified": "2023-07-23T08:53:02.244Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "admin@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b71adad3-cdb6-48f6-b9a3-80f6ca749a18",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Show single user",
+            "url": "http://127.0.0.1:8000/api/show-single-user/2",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-07-08T20:08:04.378Z",
+            "modified": "2023-07-28T20:17:44.223Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "9|CcTpgjptxw4WDux2mdXNmucONGqdW7qN0iEqVBUD"
+            },
+            "tests": []
+        },
+        {
+            "_id": "114483d6-2d93-4192-8b43-90a9d35c7591",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Update user info",
+            "url": "http://127.0.0.1:8000/api/udpate/2",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-07-23T09:06:35.307Z",
+            "modified": "2023-07-23T11:31:27.298Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "username",
+                        "value": ""
+                    },
+                    {
+                        "name": "email",
+                        "value": ""
+                    },
+                    {
+                        "name": "street",
+                        "value": "xyz 098"
+                    },
+                    {
+                        "name": "suite",
+                        "value": "abc 123"
+                    },
+                    {
+                        "name": "city",
+                        "value": "ABCD"
+                    },
+                    {
+                        "name": "zip_code",
+                        "value": "123456789"
+                    },
+                    {
+                        "name": "latitude",
+                        "value": "40.12321"
+                    },
+                    {
+                        "name": "longitude",
+                        "value": "90.12321"
+                    },
+                    {
+                        "name": "password",
+                        "value": ""
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|aTquXcvbZJu98KqwpOomcddu1aDa0GCdXLmAbKaX"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a2851aac-b3ee-4e27-89f2-d732453011b6",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Delete user",
+            "url": "http://127.0.0.1:8000/api/delete/2",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-07-23T11:17:05.502Z",
+            "modified": "2023-07-23T11:31:30.845Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|aTquXcvbZJu98KqwpOomcddu1aDa0GCdXLmAbKaX"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1bfb252b-f420-4896-b8b8-3691de2a6e24",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Verify OTP",
+            "url": "http://127.0.0.1:8000/api/verify-otp",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-07-23T20:03:00.567Z",
+            "modified": "2023-07-24T18:50:43.817Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "otp",
+                        "value": "2860"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e772b3c9-5d57-4060-9b1c-75032746bcb6",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Create user account",
+            "url": "http://127.0.0.1:8000/api/create-user",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-07-28T15:42:12.937Z",
+            "modified": "2023-07-28T16:05:15.878Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Jackson"
+                    },
+                    {
+                        "name": "username",
+                        "value": "Jacks"
+                    },
+                    {
+                        "name": "email",
+                        "value": "jack@yahoo.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    },
+                    {
+                        "name": "street",
+                        "value": "564 Smith Store St. Peabody, MA 01960"
+                    },
+                    {
+                        "name": "suite",
+                        "value": "Apt. 556"
+                    },
+                    {
+                        "name": "city",
+                        "value": "Ottawa"
+                    },
+                    {
+                        "name": "zip_code",
+                        "value": "K1Z 7B5"
+                    },
+                    {
+                        "name": "latitude",
+                        "value": "-37.3159"
+                    },
+                    {
+                        "name": "longitude",
+                        "value": "81.1496"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "9|CcTpgjptxw4WDux2mdXNmucONGqdW7qN0iEqVBUD"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bd4347c3-c0fc-44d1-b691-2457ab75cb1e",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "cbe5ee9d-c852-4b99-8c64-404efb7d28d1",
+            "name": "Create admin account",
+            "url": "http://127.0.0.1:8000/api/create-admin",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-07-28T16:07:42.164Z",
+            "modified": "2023-07-28T16:08:30.804Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "James"
+                    },
+                    {
+                        "name": "username",
+                        "value": "Jamie"
+                    },
+                    {
+                        "name": "email",
+                        "value": "jamie@yahoo.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    },
+                    {
+                        "name": "street",
+                        "value": "564 Smith Store St. Peabody, MA 01960"
+                    },
+                    {
+                        "name": "suite",
+                        "value": "Apt. 556"
+                    },
+                    {
+                        "name": "city",
+                        "value": "Ottawa"
+                    },
+                    {
+                        "name": "zip_code",
+                        "value": "K1Z 7B5"
+                    },
+                    {
+                        "name": "latitude",
+                        "value": "-37.3159"
+                    },
+                    {
+                        "name": "longitude",
+                        "value": "81.1496"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "9|CcTpgjptxw4WDux2mdXNmucONGqdW7qN0iEqVBUD"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2b0506df-8734-41d5-9af5-1dab7c645206",
+            "colId": "df53a79a-ab4a-4405-afc4-306cfa0cd1e1",
+            "containerId": "49ece377-6c76-4c0f-94db-8f5cf75ae2b6",
+            "name": "Get token",
+            "url": "http://127.0.0.1:8000/api/csrf-token",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-07-29T15:01:49.528Z",
+            "modified": "2023-07-29T15:10:13.329Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
