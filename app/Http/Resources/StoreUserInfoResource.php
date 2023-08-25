@@ -20,12 +20,6 @@ class StoreUserInfoResource extends JsonResource
             'username' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
-            'street' => 'nullable',
-            'suite' => 'nullable',
-            'city' => 'nullable',
-            'zip_code' => 'nullable',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
         ];
     }
 }
