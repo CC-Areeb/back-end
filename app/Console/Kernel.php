@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddBlogPosts;
 use App\Console\Commands\ResetUsersTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -24,5 +25,6 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
         require base_path('routes/console.php');
         ResetUsersTable::class;
+        AddBlogPosts::class;
     }
 }
