@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
             'otp' => null,
         ]);
         $this->call(UserSeeder::class);
+        $this->call(PostSeeder::class);
     }
 }
